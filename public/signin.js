@@ -24,7 +24,7 @@ $(document).ready(function() {
 		// Gather data
 		var name = $("#name").val();
 		var guests = $("#nop").val();
-		var phone = $("#phoneNumber").val();
+		var phone = $("#phone").val();
 
 		var data = {
 			name: name,
@@ -35,6 +35,9 @@ $(document).ready(function() {
 		//Fire off that data
 		$.post("/waitlist/", data, function() {
 			console.log("posted!");
+			$("#name").val("");
+		    $("#nop").val("");
+		    $("#phone").val("");
 		});
 	});
 

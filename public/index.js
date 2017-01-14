@@ -17,6 +17,7 @@ $(document).ready(function(){
 	var currentLocation = window.location.href;
 	var splitstring = currentLocation.split('/');
 	var id = splitstring[splitstring.length() - 1];
+	console.log(id);
 	getPosts(id);
 	//handle the buton click()
 });
