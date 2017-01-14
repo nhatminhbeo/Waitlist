@@ -16,6 +16,9 @@ $document.ready(function(){
 		// Will prevent default HTML form interaction
 		event.preventDefault();
 
+		var currentLocation = window.location.href;
+		var splitstring = currentLocation.split('/');
+		var id = splitstring[splitstring.length() - 1];
 
 		// Gather data
 		var name = $("#name").val();
@@ -29,7 +32,7 @@ $document.ready(function(){
 		};
 
 		//Fire off that data
-		$.put("/user", data, function() {
+		$.put("/user/" + id, data, function() {
 			console.log("posted!");
 		});
 	});

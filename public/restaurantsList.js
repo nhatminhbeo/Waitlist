@@ -14,14 +14,14 @@
 // Edit user 	| 	/user/:id 		| 	PUT 	  | Edit an user with id as json
 // =======================================================================
 $(document).ready(function(){
-	var currentLocation = window.location.href;
-	var splitstring = currentLocation.split('/');
-	var id = splitstring[splitstring.length() - 1];
-	getPosts(id);
+	//var currentLocation = window.location.href;
+	//var splitstring = currentLocation.split('/');
+	//var id = splitstring[splitstring.length() - 1];
+	getPosts();
 	//handle the buton click()
 });
 
-function getPosts(id) {
+function getPosts() {
 
 	// Reset content inside #content
 	$("#content").text("");
@@ -33,18 +33,25 @@ function getPosts(id) {
 			var name = data[i]["name"];
 			var numberOfPeople = data[i]["guest"];
 			var phoneNumber = data[i]['phone'];
+			var id = data[i]['_id'];
 
 			// Generate the html we want to insert
 			var card='<div class="card"><h3 class="card--header">' +
 				name + '</h3>' + 
 				'number of people:<p class="card--content">' + numberOfPeople + '</p></div>';
 			// Insert the card HTML
-			if(data[i]["id"] == id){
-				$('#content').append(card + '<button id="edit--post" href="/edit/{{id}}">edit</button>');
-			}
-			else{
-				$('#content').append(card);
-			}
-		
+			$('#content').append(card + '<button id="edit--post" onclick="delete({{id}},{{i}})">delete</button>');
+
+	});
+}
+
+function delete(id , i){
+	$.delete('/waitlist' + id, function (data) {
+		console.log(data);
+		if(i == 0){
+			//call to the backend to send text through twilio will be here 
+			i = 1;
+		}
+		getPosts();
 	});
 }
