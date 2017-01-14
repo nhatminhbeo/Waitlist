@@ -68,7 +68,7 @@ app.enable('trust proxy');
 // Edit     	|   /edit/:id 		|   GET       | Show form to edit a specific user
 // Get list 	|   /waitlist/ 		|   GET       | Get the userlist as json
 // Update list 	|   /waitlist/ 		|   POST      | Create new user
-// Delete list 	|   /waitlist/:id 	|   DELETE	  | Delete an user with id from waitlist
+// Delete list 	|   /waitlist/	 	|   DELETE	  | Delete an user with id from waitlist
 // Get user 	|	/user/:id 		| 	GET 	  | Get an user with id as json
 // Edit user 	| 	/user/  		| 	PUT 	  | Edit an user with id as json
 // =======================================================================
@@ -172,8 +172,43 @@ app.post('/waitlist/', function(req, res) {
 		}
 	});
 
+});
 
-
+app.delete('/waitlist/', function(req, res) {
+	// dequeue
+	dbwaitlist.allDocs({
+		include_docs: true,
+		attachments: true
+	}, function(err, result) {
+		if (err) {
+			res.sendStatus(400);
+		} else {
+			var doc = result.rows[0].doc;
+			// res.status(200).json(doc.userlist[0]);
+			// return;
+			// delete user
+			dbuser.get(doc.userlist[0], function(err, found) {
+				if (err) {
+					res.sendStatus(400);
+				} else {
+					dbuser.remove(found, function(err, removed) {
+						if (err) {
+							res.sendStatus(400);
+						} else {
+							doc.userlist.shift();
+							dbwaitlist.put(doc, function(err, result) {
+								if (err) {
+									res.sendStatus(400);
+								} else {
+									res.status(200).json(result);
+								}
+							});
+						}
+					});
+				}
+			});
+		}
+	});
 });
 
 // ====================
