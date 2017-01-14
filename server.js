@@ -7,7 +7,13 @@ var logger = require('morgan');
 
 // Create the database
 var PouchDB = require('pouchdb');
-var db = new PouchDB('workshop');
+var db = new PouchDB('database');
+db.put({
+	_id: 'waitlist',
+	list: []
+})
+
+
 
 var app = express();
 
@@ -42,6 +48,7 @@ app.enable('trust proxy');
 // Sign in  	|   /signin/   		|   GET       | Show form to signin
 // Edit     	|   /edit/:id 		|   GET       | Show form to edit a specific user
 // Get list 	|   /waitlist/ 		|   GET       | Get the userlist as json
+// Update list 	|   /waitlist/ 		|   POST      | Create new user
 // Delete list 	|   /waitlist/:id 	|   DELETE	  | Delete an user with id from waitlist
 // Get user 	|	/user/:id 		| 	GET 	  | Get an user with id as json
 // Edit user 	| 	/user/:id 		| 	PUT 	  | Edit an user with id as json
@@ -53,8 +60,17 @@ app.enable('trust proxy');
 // ====================
 app.get('/waitlist/', function(req, res) {
 	db.allDocs({
-		
-	})
+		include_docs: true;
+		attachments: true
+	}, function(err, result)) {
+		if (err) {
+			res.sendStatus(400);
+		} else {
+			var data = [];
+
+			for i in 
+		}
+	}
 })
 
 // get(routes, callbacks)
