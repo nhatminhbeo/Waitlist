@@ -192,7 +192,7 @@ app.get('/user/:id', function(req, res) {
 app.put('/user/', function(req, res) {
 	// res.status(200).json(req.body);
 	// return;
-	dbuser.get(req.body['_id'], funtion(err, found) {
+	// dbuser.get(req.body['_id'], funtion(err, found) {
 		dbuser.put(req.body, function(err, found) {
 		if (err) {
 			res.sendStatus(400); 
@@ -200,7 +200,7 @@ app.put('/user/', function(req, res) {
 			res.status(200).json(found);
 		}
 		});
-	});
+	// });
 	
 });
 
