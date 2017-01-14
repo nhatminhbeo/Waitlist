@@ -70,7 +70,7 @@ app.enable('trust proxy');
 // Update list 	|   /waitlist/ 		|   POST      | Create new user
 // Delete list 	|   /waitlist/:id 	|   DELETE	  | Delete an user with id from waitlist
 // Get user 	|	/user/:id 		| 	GET 	  | Get an user with id as json
-// Edit user 	| 	/user/:id 		| 	PUT 	  | Edit an user with id as json
+// Edit user 	| 	/user/  		| 	PUT 	  | Edit an user with id as json
 // =======================================================================
 
 // ====================
@@ -81,11 +81,11 @@ app.get('/signin/', function(req, res) {
 });
 
 app.get('/app/:id', function(req, res) {
-	res.sendFile(__dirname + '/public/index.html', {'id': id});
+	res.sendFile(__dirname + '/public/index.html', {'id': req.params.id});
 });
 
 app.get('/edit/:id', function(req, res) {
-	res.sendFile(__dirname + '/public/edit.html', {'id': id});
+	res.sendFile(__dirname + '/public/edit.html', {'id': req.params.id});
 });
 
 
@@ -176,6 +176,33 @@ app.post('/waitlist/', function(req, res) {
 
 });
 
+// ====================
+//   user resource
+// ====================
+app.get('/user/:id', function(req, res) {
+	dbuser.get(req.params.id, function(err, found) {
+		if (err) {
+			res.sendStatus(400); 
+		} else {
+			res.status(200).json(found);
+		}
+	});
+});
+
+app.put('/user/', function(req, res) {
+	// res.status(200).json(req.body);
+	// return;
+	dbuser.get(req.body['_id'], funtion(err, found) {
+		dbuser.put(req.body, function(err, found) {
+		if (err) {
+			res.sendStatus(400); 
+		} else {
+			res.status(200).json(found);
+		}
+		});
+	});
+	
+});
 
 
 
