@@ -1,0 +1,17 @@
+{
+  "name": "w4iTljSt",
+  "version": "1.0.0",
+  "description": "Waitlist system for restaurant",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Minh Tran Quoc, Brendon Chen, Justin Huynh, Shiva Kannan",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "express": "^4.14.0",
+    "morgan": "^1.7.0",
+    "pouchdb": "^6.1.1"
+  }
+}
