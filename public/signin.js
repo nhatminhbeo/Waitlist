@@ -13,37 +13,31 @@
 // Get user 	|	/user/:id 		| 	GET 	  | Get an user with id as json
 // Edit user 	| 	/user/:id 		| 	PUT 	  | Edit an user with id as json
 // =======================================================================
-$(document).ready(function(){
-	var id = "{{id}}"
-	var currentLocation = window.location.href;
-	getPosts(id);
-	//handle the buton click()
+$(document).ready(function() {
+	// When the html page has been loaded, start here:
+	// alert("Hello");
+
+	$("form").submit(function(event) {
+		// Will prevent default HTML form interaction
+		event.preventDefault();
+
+		// Gather data
+		var name = $("#name").val();
+		var guests = $("#nop").val();
+		var phone = $("#phoneNumber").val();
+
+		var data = {
+			name: name,
+			guests: guests,
+			phone: phone
+		};
+
+		//Fire off that data
+		$.post("/waitlist/", data, function() {
+			console.log("posted!");
+		});
+	});
+
 });
 
-function getPosts(id) {
 
-	// Reset content inside #content
-	$("#content").text("");
-
-	$.get('/waitlist/', function(data) {
-	// console.log(data);
-		for (var i=0; i<data.length; i++) {
-			// Find the important stuff inside data
-			var name = data[i]["name"];
-			var numberOfPeople = data[i]["guest"];
-			var phoneNumber = data[i]['phone'];
-
-			// Generate the html we want to insert
-			var card='<div class="card"><h3 class="card--header">' +
-				name + '</h3>' + 
-				'number of people:<p class="card--content">' + numberOfPeople + '</p></div>';
-			// Insert the card HTML
-			if(data[i]["id"] == id){
-				$('#content').append(card + '<button id="edit--post" href="/edit/{{id}}">edit</button>');
-			}
-			else{
-				$('#content').append(card);
-			}
-		
-	});
-}
