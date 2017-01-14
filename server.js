@@ -36,14 +36,26 @@ app.enable('trust proxy');
 // RESTful Routes
 // HTTP Verbs: GET, POST, PUT, DELETE
 //
-// Name     |   Path      |   HTTP Verb |   Purpose
+// Name     	|   Path      		|   HTTP Verb |   Purpose
 // =======================================================================
-// Index    |   /         |   GET       | List all the posts
-// Create   |   /         |   POST      | Create a new post
-// Show     |   /:id      |   GET       | Show a single post
-// Update   |   /:id      |   PUT       | Update a particular post
-// Delete   |   /:id      |   DELETE    | Delete a particular post
+// Index    	|   /:id      		|   GET       | Show the waitlist
+// Sign in  	|   /signin/   		|   GET       | Show form to signin
+// Edit     	|   /edit/:id 		|   GET       | Show form to edit a specific user
+// Get list 	|   /waitlist/ 		|   GET       | Get the userlist as json
+// Delete list 	|   /waitlist/:id 	|   DELETE	  | Delete an user with id from waitlist
+// Get user 	|	/user/:id 		| 	GET 	  | Get an user with id as json
+// Edit user 	| 	/user/:id 		| 	PUT 	  | Edit an user with id as json
 // =======================================================================
+
+
+// ====================
+//   waitlist resource
+// ====================
+app.get('/waitlist/', function(req, res) {
+	db.allDocs({
+		
+	})
+})
 
 // get(routes, callbacks)
 app.get('/posts/', function(req, res) {
