@@ -3,6 +3,7 @@ var bodyParser = require('body-parser');
 var logger = require('morgan');
 
 // THIS IS A TEST COMMENT
+// THIS IS A SECOND COMMENT
 
 // Create the database
 var PouchDB = require('pouchdb');
