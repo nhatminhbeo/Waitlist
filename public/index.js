@@ -1,24 +1,9 @@
-// =======================================================================
-// RESTful Routes
-// HTTP Verbs: GET, POST, PUT, DELETE
-//
-// Name     	|   Path      		|   HTTP Verb |   Purpose
-// =======================================================================
-// Index    	|   /:id      		|   GET       | Show the waitlist
-// Sign in  	|   /signin/   		|   GET       | Show form to signin
-// Edit     	|   /edit/:id 		|   GET       | Show form to edit a specific user
-// Get list 	|   /waitlist/ 		|   GET       | Get the userlist as json
-// Update list 	|   /waitlist/ 		|   POST      | Create new user
-// Delete list 	|   /waitlist/:id 	|   DELETE	  | Delete an user with id from waitlist
-// Get user 	|	/user/:id 		| 	GET 	  | Get an user with id as json
-// Edit user 	| 	/user/:id 		| 	PUT 	  | Edit an user with id as json
-// =======================================================================
 $(document).ready(function(){
-	var currentLocation = window.location.href;
-	var splitstring = currentLocation.split('/');
-	var id = splitstring[splitstring.length() - 1];
-	console.log(id);
-	getPosts(id);
+	// var currentLocation = window.location.href;
+	// var splitstring = currentLocation.split('/');
+	// var id = splitstring[splitstring.length() - 1];
+	// console.log(id);
+	getPosts(10);
 	//handle the buton click()
 });
 
@@ -40,12 +25,12 @@ function getPosts(id) {
 				name + '</h3>' + 
 				'number of people:<p class="card--content">' + numberOfPeople + '</p></div>';
 			// Insert the card HTML
-			if(data[i]["id"] == id){
+			if(data[i]["_id"] == id){
 				$('#content').append(card + '<button id="edit--post" href="/edit/{{id}}">edit</button>');
 			}
 			else{
 				$('#content').append(card);
 			}
-		
+		}		
 	});
 }
