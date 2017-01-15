@@ -122,17 +122,16 @@ app.get('/waitlist/', function(req, res) {
 					} else {
 						data.push(found);
 						j++;
+						console.log('j: ' + j);
+						console.log('i: ' + i);
 						if (j === result.rows[0].doc.userlist.length) {
-							console.log(i);
 							res.status(200).json(data);
 							return;
 						}
 					//data2 = JSON.stringify(data);
-				}
-				
+					}
 				});
 			}
-			
 		}
 	});
 });
@@ -154,31 +153,29 @@ app.post('/waitlist/', function(req, res) {
 			console.log("failed to create user");
 			res.sendStatus(400);
 		} else {
-				// enqueue
-				dbwaitlist.allDocs({
-					include_docs: true,
-					attachments: true
-				}, function(err, result) {
-					if (err) {
-						res.sendStatus(400);
-					} else {
-						var doc = result.rows[0].doc;
-						doc.userlist.push(created.id);
-						dbwaitlist.put(doc, function(err, response) {
-							if (err) {
-								res.sendStatus(400);
-							}
-							else {
-								initsms(created.id, req.body.phone);
-								res.status(200).json(created);
-							}
-						});
-						
-					}
-				});
+			// enqueue
+			dbwaitlist.allDocs({
+				include_docs: true,
+				attachments: true
+			}, function(err, result) {
+				if (err) {
+					res.sendStatus(400);
+				} else {
+					var doc = result.rows[0].doc;
+					doc.userlist.push(created.id);
+					dbwaitlist.put(doc, function(err, response) {
+						if (err) {
+							res.sendStatus(400);
+						}
+						else {
+							initsms(created.id, req.body.phone);
+							res.status(200).json(created);
+						}
+					});
+				}
+			});
 		}
 	});
-
 });
 
 app.delete('/waitlist/', function(req, res) {
@@ -252,7 +249,7 @@ function initsms(id, phone) {
 	twilio.sendSms({
 	    to: phone,
 	    from:'4157021794',
-	    body:'your waitlist page: http://localhost:3000/app/' + id
+	    body:'Your waitlist page: http://localhost:3000/app/' + id
 	}, function(error, message) {
 	    if (!error) {
 	        console.log('Success! The SID for this SMS message is:');
@@ -340,5 +337,5 @@ function informsms(phone) {
 
 
 app.listen(3000, function() {
-	console.log('Server running');
+	console.log('Server running!');
 });
