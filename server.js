@@ -269,7 +269,7 @@ function informsms(phone) {
 	twilio.sendSms({
 	    to: phone,
 	    from:'4157021794',
-	    body:'Your seat is almost ready. Please start coming over !'
+	    body:'Your seat is almost ready. Please start coming over!'
 	}, function(error, message) {
 	    if (!error) {
 	        console.log('Success! The SID for this SMS message is:');
