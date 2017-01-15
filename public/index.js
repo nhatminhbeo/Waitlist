@@ -4,9 +4,7 @@ $(document).ready(function(){
 	var id = splitstring[splitstring.length - 1];
 	console.log(id);
 	getPosts(id);
-	//handle the buton click()
-
-
+	// Handle  the buton click()
 });
 
 function getPosts(id) {
@@ -15,7 +13,7 @@ function getPosts(id) {
 	$("#content").text("");
 
 	$.get('/waitlist/', function(data) {
-		if(id=="restaurant"){
+		if(id == "restaurant") {
 			$('#content').append('<div class="card"><form action="http://localhost:3000/app/restaurant"><button class="delete">Seat Next Person</button></form></div>')
 		}
 	// console.log(data);
@@ -39,7 +37,8 @@ function getPosts(id) {
 			$('#content').append('</div>');
 		}
 		$('.delete').click(function() {
-			//Fire off that data
+
+			// Fire off that data
 			$.ajax({
 				url:"/waitlist/",
 				type: 'DELETE',
