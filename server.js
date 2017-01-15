@@ -6,6 +6,7 @@ var logger = require('morgan');
 // THIS IS A SECOND COMMENT
 
 // Create the database
+var twilio = require('twilio')('AC8df14a0491d3751cbd3c36f40661c65f', 'b8e1b0e34b889a6e63766c3ce3500eb3');
 var PouchDB = require('pouchdb');
 var dbwaitlist = new PouchDB('waitlist');
 var dbuser = new PouchDB('user');
@@ -63,6 +64,7 @@ app.enable('trust proxy');
 //
 // Name     	|   Path      		|   HTTP Verb |   Purpose
 // =======================================================================
+// Index    	|   /app/     	|   GET       | Show the waitlist
 // Index    	|   /app/:id      	|   GET       | Show the waitlist
 // Sign in  	|   /signin/   		|   GET       | Show form to signin
 // Edit     	|   /edit/:id 		|   GET       | Show form to edit a specific user
@@ -82,6 +84,10 @@ app.get('/signin/', function(req, res) {
 
 app.get('/app/:id', function(req, res) {
 	res.sendFile(__dirname + '/public/index.html', {'id': req.params.id});
+});
+
+app.get('/app/', function(req, res) {
+	res.sendFile(__dirname + '/public/index.html');
 });
 
 app.get('/edit/:id', function(req, res) {
@@ -163,6 +169,7 @@ app.post('/waitlist/', function(req, res) {
 								res.sendStatus(400);
 							}
 							else {
+								initsms(created.id, req.body.phone);
 								res.status(200).json(created);
 							}
 						});
@@ -191,11 +198,13 @@ app.delete('/waitlist/', function(req, res) {
 				if (err) {
 					res.sendStatus(400);
 				} else {
+					var phone = found.phone;
 					dbuser.remove(found, function(err, removed) {
 						if (err) {
 							res.sendStatus(400);
 						} else {
 							doc.userlist.shift();
+							informsms(phone);
 							dbwaitlist.put(doc, function(err, result) {
 								if (err) {
 									res.sendStatus(400);
@@ -239,6 +248,39 @@ app.put('/user/', function(req, res) {
 	
 });
 
+function initsms(id, phone) {
+	twilio.sendSms({
+	    to: phone,
+	    from:'4157021794',
+	    body:'your waitlist page: http://localhost:3000/app/' + id
+	}, function(error, message) {
+	    if (!error) {
+	        console.log('Success! The SID for this SMS message is:');
+	        console.log(message.sid);
+	        console.log('Message sent on:');
+	        console.log(message.dateCreated);
+	    } else {
+	        console.log('Oops! There was an error.');
+	    }
+	});
+}
+
+function informsms(phone) {
+	twilio.sendSms({
+	    to: phone,
+	    from:'4157021794',
+	    body:'Your seat is almost ready. Please start coming over!'
+	}, function(error, message) {
+	    if (!error) {
+	        console.log('Success! The SID for this SMS message is:');
+	        console.log(message.sid);
+	        console.log('Message sent on:');
+	        console.log(message.dateCreated);
+	    } else {
+	        console.log('Oops! There was an error.');
+	    }
+	});
+}
 
 
 // // get(routes, callbacks)
