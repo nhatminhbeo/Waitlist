@@ -1,5 +1,5 @@
 {
-  "name": "TEST",
+  "name": "Waitlist",
   "version": "1.0.0",
   "description": "Waitlist system for restaurant",
   "main": "server.js",
