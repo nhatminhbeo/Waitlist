@@ -7,7 +7,7 @@ We were also inspired by a sushi restaurant that adopted a similar approach.
 
 ## What it does
 
-Customers go to the restaurant and sign up on a wait list. They are enqueued and sent a confirmation SMS message containing a link to the waitlist. Using the link, they are able to view their position and how close they are to enjoying delicious food. Customers are also able to edit their entry and change fields such as the number of people.
+Customers go to the restaurant and sign up on a waitlist. They are enqueued and sent a confirmation SMS message containing a link to the waitlist. Using the link, they are able to view their position and how close they are to enjoying delicious food. Customers are also able to edit their entry and change fields such as the number of people.
 
 ## How we built it
 
