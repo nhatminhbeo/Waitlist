@@ -1,4 +1,4 @@
-(https://github.com/nhatminhbeo/Waitlist/devpost/empty\_signin)
+![The sign in screen for customers to get on the waitlist](devpost/empty_signin.png)
 ## Inspiration
 
 Traditionally, when customers go to restaurants, they put their names down on a waitlist and hang around the waiting area. If a restaurant was more sophisticated, they might give customers buzzers that allow for some mobility around the restaurant. Now, _Waitlist_ expands the range from the restaurant to virtually the entire world (but realistically the entire local mall).
