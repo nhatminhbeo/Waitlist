@@ -64,7 +64,7 @@ app.enable('trust proxy');
 //
 // Name     	|   Path      		|   HTTP Verb |   Purpose
 // =======================================================================
-// Index    	|   /app/     	|   GET       | Show the waitlist
+// Index    	|   /app/       	|   GET       | Show the waitlist
 // Index    	|   /app/:id      	|   GET       | Show the waitlist
 // Sign in  	|   /signin/   		|   GET       | Show form to signin
 // Edit     	|   /edit/:id 		|   GET       | Show form to edit a specific user
