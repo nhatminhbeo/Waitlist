@@ -4,9 +4,7 @@ $(document).ready(function(){
 	var id = splitstring[splitstring.length - 1];
 	console.log(id);
 	getPosts(id);
-	//handle the buton click()
-
-
+	// Handle  the buton click()
 });
 
 function getPosts(id) {
@@ -15,8 +13,8 @@ function getPosts(id) {
 	$("#content").text("");
 
 	$.get('/waitlist/', function(data) {
-		if(id=="restaurant"){
-			$('#content').append('<form action="http://localhost:3000/app/restaurant"><button class="delete">delete</button></form>')
+		if(id == "restaurant") {
+			$('#content').append('<div class="card"><form action="http://localhost:3000/app/restaurant"><button class="delete">Seat Next Person</button></form></div>')
 		}
 	// console.log(data);
 		for (var i=0; i<data.length; i++) {
@@ -28,17 +26,19 @@ function getPosts(id) {
 			// Generate the html we want to insert
 			var card='<div class="card"><h3 class="card--header">' +
 				name + '</h3>' + 
-				'number of people:<p class="card--content">' + numberOfPeople + '</p></div>';
+				'Number of People:<p class="card--content">' + numberOfPeople + '</p>';
 			// Insert the card HTML
 			if(data[i]["_id"] == id){
-				$('#content').append(card + '<button id="edit--post" onclick="location.href=\'/edit/' + id + '\';">edit</button>');
+				$('#content').append(card + '<button id="edit--post" onclick="location.href=\'/edit/' + id + '\';">Edit</button>');
 			}
 			else{
 				$('#content').append(card);
 			}
+			$('#content').append('</div>');
 		}
 		$('.delete').click(function() {
-				//Fire off that data
+
+			// Fire off that data
 			$.ajax({
 				url:"/waitlist/",
 				type: 'DELETE',
@@ -46,6 +46,6 @@ function getPosts(id) {
 					console.log("deleted!");
 				}
 			});
-});		
+		});		
 	});
 }
