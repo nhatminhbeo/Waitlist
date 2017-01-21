@@ -1,6 +1,7 @@
 var express = require('express');
 var bodyParser = require('body-parser');
 var logger = require('morgan');
+var PORT = process.env.PORT || 80;
 
 // THIS IS A TEST COMMENT
 // THIS IS A SECOND COMMENT
@@ -336,6 +337,6 @@ function informsms(phone) {
 // });
 
 
-app.listen(3000, function() {
+app.listen(PORT, function() {
 	console.log('Server running!');
 });
