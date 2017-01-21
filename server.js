@@ -336,6 +336,6 @@ function informsms(phone) {
 // });
 
 
-app.listen(3000, function() {
+app.listen(80, function() {
 	console.log('Server running!');
 });
