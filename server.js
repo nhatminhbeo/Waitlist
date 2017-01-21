@@ -337,6 +337,10 @@ function informsms(phone) {
 // });
 
 
+<<<<<<< HEAD
 app.listen(PORT, function() {
+=======
+app.listen(80, function() {
+>>>>>>> 1bd026a2b3839620782428f39427765bd70ad638
 	console.log('Server running!');
 });
