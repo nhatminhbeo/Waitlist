@@ -250,7 +250,7 @@ function initsms(id, phone) {
 	twilio.sendSms({
 	    to: phone,
 	    from:'4157021794',
-	    body:'Your waitlist page: http://localhost:3000/app/' + id
+	    body:'Your waitlist page: https://restaurantwaitlist.herokuapp.com/app/' + id
 	}, function(error, message) {
 	    if (!error) {
 	        console.log('Success! The SID for this SMS message is:');
