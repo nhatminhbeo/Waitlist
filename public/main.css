@@ -52,7 +52,7 @@ html, body {
 .card button {
 	-webkit-appearance: none; /* safari */
 	-moz-appearance: none; /* firefox */
-	eppearance: none; /* chrome */
+	appearance: none; /* chrome */
 
 	border: none;
 	border-radius: 20px;
