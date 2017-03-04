@@ -1,6 +1,7 @@
 var express = require('express');
 var bodyParser = require('body-parser');
 var logger = require('morgan');
+var PORT = process.env.PORT || 80;
 
 // THIS IS A TEST COMMENT
 // THIS IS A SECOND COMMENT
@@ -64,7 +65,7 @@ app.enable('trust proxy');
 //
 // Name     	|   Path      		|   HTTP Verb |   Purpose
 // =======================================================================
-// Index    	|   /app/     	|   GET       | Show the waitlist
+// Index    	|   /app/       	|   GET       | Show the waitlist
 // Index    	|   /app/:id      	|   GET       | Show the waitlist
 // Sign in  	|   /signin/   		|   GET       | Show form to signin
 // Edit     	|   /edit/:id 		|   GET       | Show form to edit a specific user
@@ -249,7 +250,7 @@ function initsms(id, phone) {
 	twilio.sendSms({
 	    to: phone,
 	    from:'4157021794',
-	    body:'Your waitlist page: http://localhost:3000/app/' + id
+	    body:'Your waitlist page: https://restaurantwaitlist.herokuapp.com/app/' + id
 	}, function(error, message) {
 	    if (!error) {
 	        console.log('Success! The SID for this SMS message is:');
@@ -336,6 +337,6 @@ function informsms(phone) {
 // });
 
 
-app.listen(3000, function() {
+app.listen(PORT, function() {
 	console.log('Server running!');
 });
